@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model equipement -->
+
+    <!-- form vue pour equipement -->
+    <record model="ir.ui.view" id="equipement_form_view">
+        <field name="name">equipement.form</field>
+        <field name="model">estk.equipement</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire d'équipement">
+                <sheet>
+                    <group string="Informations de l'équipement">
+                        <field name="image"/>
+                        <field name="libelle"/>
+                        <field name="etat"/>
+                        <field name="nombre"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour equipement -->
+
+    <record model="ir.ui.view" id="equipement_list_view">
+        <field name="name">equipement.list</field>
+        <field name="model">estk.equipement</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Equipements">
+                <field name="libelle"/>
+                <field name="etat"/>
+                <field name="nombre"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Kanban vue pour employee -->
+
+    <record model="ir.ui.view" id="equipement_kanban_view">
+        <field name="name">equipement.kanban</field>
+        <field name="model">estk.equipement</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="libelle"/>
+                <field name="etat"/>
+                <field name="nombre"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img alt="Image" t-att-src="kanban_image('estk.equipement', 'image',record.id.raw_value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        libelle : <field name="libelle"/><br/>
+                                        état : <field name="etat"/><br/>
+                                        nombre : <field name="nombre"/><br/>
+                                    </strong>
+                                </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- search vue pour equipement -->
+
+
+
+<record model="ir.actions.act_window" id="equipement_list_action">
+            <field name="name">Equipements</field>
+            <field name="res_model">estk.equipement</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier équipement</p>
+            </field>
+    </record>
+
+
+        <menuitem id="equipements_menu" name="Equipements"
+                  parent="main_salles_equipements_menu"  action="equipement_list_action" sequence="0"/>
+</odoo>

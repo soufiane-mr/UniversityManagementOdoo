@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model resultatannuel -->
+
+    <!-- form vue pour resultatannuel -->
+    <record model="ir.ui.view" id="resultatannuel_form_view">
+        <field name="name">resultatannuel.form</field>
+        <field name="model">estk.resultatannuel</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire d'un résultat annuel">
+                <sheet>
+                    <group string="Informations de l'étudiant">
+                        <field name="etudiant_id"/>
+                    </group>
+                    <group string="Informations de l'examen">
+                        <field name="anneeuniversitaire"/>
+                        <field name="semestre"/>
+                        <field name="note_semestre"/>
+                        <field name="observation"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour resultatannuel -->
+
+    <record model="ir.ui.view" id="resultatannuel_list_view">
+        <field name="name">resultatannuel.list</field>
+        <field name="model">estk.resultatannuel</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Resultats Annuels">
+                        <field name="etudiant_id"/>
+                        <field name="anneeuniversitaire"/>
+                        <field name="semestre"/>
+                        <field name="note_semestre"/>
+                        <field name="observation"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour resultatannuel -->
+
+
+
+<record model="ir.actions.act_window" id="resultatannuel_list_action">
+            <field name="name">Résultats Annuels</field>
+            <field name="res_model">estk.resultatannuel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier résultat annuel</p>
+            </field>
+    </record>
+
+
+        <menuitem id="resultatannuel_menu" name="Résultats Annuels"
+                  parent="main_examens_menu"  action="resultatannuel_list_action" sequence="5"/>
+</odoo>

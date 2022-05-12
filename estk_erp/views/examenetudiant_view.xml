@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model examenetudiant -->
+
+    <!-- form vue pour examenetudiant -->
+    <record model="ir.ui.view" id="examenetudiant_form_view">
+        <field name="name">examenetudiant.form</field>
+        <field name="model">estk.examenetudiant</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire d'inscription examen">
+                <sheet>
+                    <group string="Informations de l'étudiant">
+                        <field name="etudiant_id"/>
+                        <field name="nom"/>
+                        <field name="prenom"/>
+                        <field name="cne"/>
+                        <field name="cni"/>
+                        <field name="appogee"/>
+                    </group>
+                    <group string="Informations de l'examen">
+                        <field name="examen_id"/>
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="formation"/>
+                        <field name="semestre_id"/>
+                        <field name="elementmodule"/>
+                        <field name="salle_id"/>
+                        <field name="numéro_examen"/>
+<!--                        <field name="salle_ids" widget="many2many_tags"/>-->
+<!--                        <field name="groupe_ids" widget="many2many_tags"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour examenetudiant -->
+
+    <record model="ir.ui.view" id="examenetudiant_list_view">
+        <field name="name">examenetudiant.list</field>
+        <field name="model">estk.examenetudiant</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Inscriptions des examens">
+                        <field name="nom"/>
+                        <field name="prenom"/>
+                        <field name="cne"/>
+                        <field name="cni"/>
+                        <field name="appogee"/>
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="formation"/>
+                        <field name="semestre_id"/>
+                        <field name="elementmodule"/>
+                        <field name="salle_id"/>
+                        <field name="numéro_examen"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour examens -->
+
+
+
+<record model="ir.actions.act_window" id="examenetudiant_list_action">
+            <field name="name">Inscriptions aux examens</field>
+            <field name="res_model">estk.examenetudiant</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre première inscription d'un étudiant a un examen</p>
+            </field>
+    </record>
+
+
+        <menuitem id="examenetudiant_menu" name="Inscriptions Examens"
+                  parent="main_examens_menu"  action="examenetudiant_list_action" sequence="2"/>
+</odoo>

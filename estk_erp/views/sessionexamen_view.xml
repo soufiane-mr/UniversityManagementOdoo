@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model sessionexamen -->
+
+    <!-- form vue pour session examens -->
+    <record model="ir.ui.view" id="sessionexamen_form_view">
+        <field name="name">sessionexamen.form</field>
+        <field name="model">estk.sessionexamen</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire de semestre">
+                <sheet>
+                    <group>
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="formation_id"/>
+                        <field name="semestre_id"/>
+                        <field name="examen_ids" widget="many2many_tags"/>
+                        <field name="session_effectue" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour session examen -->
+
+    <record model="ir.ui.view" id="sessionexamen_list_view">
+        <field name="name">sessionexamen.list</field>
+        <field name="model">estk.sessionexamen</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Sessions des examens">
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="formation_id"/>
+                        <field name="semestre_id"/>
+                        <field name="session_effectue" widget="boolean_toggle"/>
+                        <button name="creation_examens"
+                                string="Ajouter les examens"
+                                type = "object"
+                                class ="oe_highlight"
+                                attrs="{'invisible': [('session_effectue', '=', True)]}"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour session examen -->
+
+
+
+<record model="ir.actions.act_window" id="sessionexamen_list_action">
+            <field name="name">Sessions des examens</field>
+            <field name="res_model">estk.sessionexamen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre première session d'examen</p>
+            </field>
+    </record>
+
+
+        <menuitem id="sessionexamens_menu" name="Sessions"
+                  parent="main_examens_menu"  action="sessionexamen_list_action" sequence="0"/>
+</odoo>

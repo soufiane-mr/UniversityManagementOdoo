@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model examen -->
+
+    <!-- form vue pour examens -->
+    <record model="ir.ui.view" id="examen_form_view">
+        <field name="name">examen.form</field>
+        <field name="model">estk.examen</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire d'examen">
+                <header>
+                    <button name="inscriptions_examens"
+                                string="Ajouter les etudiants aux examens"
+                                type = "object"
+                                class ="oe_highlight"/>
+                    <button name="créer_resultats_examens"
+                                string="Ajouter les enregistrements des résultats des éxamens pour les étudiants"
+                                type = "object"
+                                class ="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="session_id"/>
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire"/>
+                        <field name="formation"/>
+                        <field name="semestre"/>
+                        <field name="elementmodule_id"/>
+                        <field name="date"/>
+                        <field name="duree"/>
+                        <field name="salle_ids" widget="many2many_tags"/>
+                        <field name="effecter_etudiants_aux_examens" />
+<!--                        <field name="groupe_ids" widget="many2many_tags"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour examen -->
+
+    <record model="ir.ui.view" id="examen_list_view">
+        <field name="name">examen.list</field>
+        <field name="model">estk.examen</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des examens">
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire"/>
+                        <field name="formation"/>
+                        <field name="semestre"/>
+                        <field name="elementmodule_id"/>
+                        <field name="date"/>
+                        <field name="salle_ids" widget="many2many_tags"/>
+                        <field name="duree"/>
+                <button name="calculer_notes_modules"
+                                string="Calculer notes des modules"
+                                type = "object"
+                                class ="oe_highlight"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour examens -->
+
+    <record model="ir.ui.view" id="examen_search_view">
+        <field name="name">examen.search</field>
+        <field name="model">estk.examen</field>
+        <field name="arch" type="xml">
+            <search>
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire"/>
+                        <field name="formation"/>
+                        <field name="semestre"/>
+                        <field name="elementmodule_id"/>
+                        <group string="Groupe">
+                            <filter name="periode" string="Pérode" context="{'group_by':'periode'}"/>
+                            <filter name="type_session" string="Session" context="{'group_by':'type_session'}"/>
+                            <filter name="anneeuniversitaire" string="Année universitaire" context="{'group_by':'anneeuniversitaire'}"/>
+                            <filter name="formation" string="Formation" context="{'group_by':'formation'}"/>
+                            <filter name="semestre" string="Semestre" context="{'group_by':'semestre'}"/>
+                            <filter name="elementmodule_id" string="Element de module" context="{'group_by':'elementmodule_id'}"/>
+                        </group>
+
+            </search>
+        </field>
+    </record>
+
+
+
+<record model="ir.actions.act_window" id="examen_list_action">
+            <field name="name">Examens</field>
+            <field name="res_model">estk.examen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier examen</p>
+            </field>
+    </record>
+
+
+        <menuitem id="examens_menu" name="Examens"
+                  parent="main_examens_menu"  action="examen_list_action" sequence="1"/>
+</odoo>

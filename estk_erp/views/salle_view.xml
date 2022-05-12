@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model salle -->
+
+    <!-- form vue pour salle -->
+    <record model="ir.ui.view" id="salle_form_view">
+        <field name="name">salle.form</field>
+        <field name="model">estk.salle</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire de Salle">
+                <sheet>
+                    <group string="Informations de la salle">
+                        <field name="nom_salle"/>
+                        <field name="capacite_cours"/>
+                        <field name="capacite_examens"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour salle -->
+
+    <record model="ir.ui.view" id="salle_list_view">
+        <field name="name">salle.list</field>
+        <field name="model">estk.salle</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Salles">
+                <field name="nom_salle"/>
+                <field name="capacite_cours"/>
+                <field name="capacite_examens"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour salle -->
+
+
+<!--    &lt;!&ndash; declaration des Actions pour le model formation &ndash;&gt;-->
+<record model="ir.actions.act_window" id="salle_list_action">
+            <field name="name">Salles</field>
+            <field name="res_model">estk.salle</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre première salle</p>
+            </field>
+    </record>
+
+
+        <menuitem id="salles_menu" name="Salles"
+                  parent="main_salles_equipements_menu"  action="salle_list_action" sequence="1"/>
+</odoo>

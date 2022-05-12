@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model inscription pedagogique -->
+
+    <!-- form vue pour inscription pedagogique -->
+    <record model="ir.ui.view" id="inscriptionpedag_form_view">
+        <field name="name">inscriptionpedag.form</field>
+        <field name="model">estk.inscriptionpedag</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire d'une Insctiption Pedagogique">
+                <sheet>
+                    <group>
+                        <field name="etudiant_id"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="semestre_id"/>
+                        <field name="formation_id"/>
+                        <field name="module_ids" widget="many2many_tags"/>
+                        <field name="elementmodule_ids" widget="many2many_tags"/>
+                        <field name="groupe_id"/>
+                        <field name="affecte_groupe" widget="boolean_toggle"/>
+                    </group>
+<!--                    <notebook>-->
+<!--                        <page string="Modules">-->
+<!--                            <group>-->
+<!--                                <field name="module_ids"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour inscription pedagogique -->
+
+    <record model="ir.ui.view" id="inscriptionpedag_list_view">
+        <field name="name">inscriptionpedag.list</field>
+        <field name="model">estk.inscriptionpedag</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Inscription pedagogiques">
+                <field name="nom"/>
+                <field name="prenom"/>
+                <field name="cne"/>
+                <field name="numappogee"/>
+                <field name="anneeuniversitaire_id"/>
+                <field name="semestre_id"/>
+                <field name="formation_id"/>
+                <field name="module_ids" widget="many2many_tags"/>
+                <field name="elementmodule_ids" widget="many2many_tags"/>
+                <field name="groupe_id"/>
+                <field name="affecte_groupe" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <!-- search vue pour inscription pedagogique -->
+
+    <record model="ir.ui.view" id="inscriptionpedag_search_view">
+        <field name="name">inscriptionpedag search</field>
+        <field name="model">estk.inscriptionpedag</field>
+        <field name="arch" type="xml">
+            <search>
+            <field name="nom"/>
+            <field name="prenom"/>
+            <field name="numappogee"/>
+            <field name="anneeuniversitaire_id"/>
+            <field name="semestre_id"/>
+            <field name="formation_id"/>
+            <field name="groupe_id"/>
+            <group string="Groupe by">
+                <filter name="anneeuniversitaire_id" string="Année Universitaire" context="{'group_by':'anneeuniversitaire_id'}"/>
+                <filter name="semestre_id" string="Semestre" context="{'group_by':'semestre_id'}"/>
+                <filter name="formation_id" string="Formation" context="{'group_by':'formation_id'}"/>
+                <filter name="groupe_id" string="Groupe" context="{'group_by':'groupe_id'}"/>
+            </group>
+            </search>
+        </field>
+    </record>
+
+
+<!--    &lt;!&ndash; declaration des Actions pour le model inscription pedagogique &ndash;&gt;-->
+<record model="ir.actions.act_window" id="inscriptionpedag_list_action">
+            <field name="name">Inscriptions Pédagogiques</field>
+            <field name="res_model">estk.inscriptionpedag</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premiere Inscription Pédagogique </p>
+            </field>
+    </record>
+
+
+        <menuitem id="inscriptionpedag_menu" name="Inscriptions Pédagogiques"
+                  parent="main_etudiants_menu"  action="inscriptionpedag_list_action" sequence="2"/>
+</odoo>

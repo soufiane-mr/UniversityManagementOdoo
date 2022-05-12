@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model employee -->
+
+    <!-- form vue pour employe -->
+    <record model="ir.ui.view" id="employee_form_view">
+        <field name="name">employee.form</field>
+        <field name="model">estk.employee</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire de professeur">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="image" class="oe-avatar" widget="image" style="width: 100px; height: 100px;"/>
+                        </group>
+                    </group>
+                    <group string="Information de l'employé">
+                        <field name="nom"/>
+                        <field name="prenom"/>
+                        <field name="date_naissance"/>
+                        <field name="age"/>
+                        <field name="fontionalite"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour employee -->
+
+    <record model="ir.ui.view" id="employee_list_view">
+        <field name="name">employee.list</field>
+        <field name="model">estk.employee</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Employés">
+                <field name="nom"/>
+                <field name="prenom"/>
+                <field name="date_naissance"/>
+                <field name="age"/>
+                <field name="fontionalite"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Kanban vue pour employee -->
+
+    <record model="ir.ui.view" id="employee_kanban_view">
+        <field name="name">employee.kanban</field>
+        <field name="model">estk.employee</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="nom"/>
+                <field name="prenom"/>
+                <field name="date_naissance"/>
+                <field name="age"/>
+                <field name="fontionalite"/>
+                <field name="image"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                 <div class="o_kanban_image d-none d-md-block"
+                                    t-attf-style="background-image:url('#{kanban_image('estk.employee', 'image', record.id.raw_value, placeholder)}')" />
+                                <div class="oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title">
+                                        nom : <field name="nom"/><br/>
+                                        prénom : <field name="prenom"/><br/>
+                                        age : <field name="age"/><br/>
+                                        fonctionnalité : <field name="fontionalite"/><br/>
+                                    </strong>
+                                </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- search vue pour employee -->
+
+
+<!--    &lt;!&ndash; declaration des Actions pour le model employee &ndash;&gt;-->
+<record model="ir.actions.act_window" id="employee_list_action">
+            <field name="name">Employés</field>
+            <field name="res_model">estk.employee</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier employé</p>
+            </field>
+    </record>
+
+
+        <menuitem id="employees_menu" name="Employés"
+                  parent="main_professeurs_menu"  action="employee_list_action"/>
+</odoo>

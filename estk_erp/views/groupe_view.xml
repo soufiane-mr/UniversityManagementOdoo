@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model groupe -->
+
+    <!-- form vue pour groupe -->
+    <record model="ir.ui.view" id="groupe_form_view">
+        <field name="name">groupe.form</field>
+        <field name="model">estk.groupe</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire de Groupe">
+                <sheet>
+                    <group>
+                        <field name="nom_groupe"/>
+                        <field name="formation_id"/>
+                        <field name="semestre_id"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="effectif"/>
+                        <field name="groupe_complet"/>
+                    </group>
+                        <notebook>
+                        <page string="Les Etudiants du groupe">
+                            <group>
+                                <field name="etudiant_ids"/>
+                            </group>
+                        </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour groupe -->
+
+    <record model="ir.ui.view" id="groupe_list_view">
+        <field name="name">groupe.list</field>
+        <field name="model">estk.groupe</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Groupe">
+                        <field name="nom_groupe"/>
+                        <field name="formation_id"/>
+                        <field name="semestre_id"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="etudiant_ids"/>
+                        <field name="effectif"/>
+                        <field name="groupe_complet"/>
+                        <button name="affectation_etudiants"
+                                string="Affecter Etudiants au groupe"
+                                type = "object"
+                                class ="oe_highlight"
+                                attrs="{'invisible': [('groupe_complet', '=', True)]}"/>
+
+
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour groupe -->
+
+
+
+<record model="ir.actions.act_window" id="groupe_list_action">
+            <field name="name">Groupes</field>
+            <field name="res_model">estk.groupe</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier groupe</p>
+            </field>
+    </record>
+
+
+        <menuitem id="groupes_menu" name="Groupes"
+                  parent="main_etudiants_menu"  action="groupe_list_action"/>
+</odoo>

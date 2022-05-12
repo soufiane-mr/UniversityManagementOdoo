@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model formation -->
+
+    <!-- form vue pour formation -->
+    <record model="ir.ui.view" id="anneeuniversitaire_form_view">
+        <field name="name">anneeuniversitaire.form</field>
+        <field name="model">estk.anneeuniversitaire</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire de L'année universitaire">
+                <sheet>
+                    <group>
+                        <field name="anneeuniversitaire"/>
+                        <field name="année_prochaine"/>
+                        <field name="debut"/>
+                        <field name="fin"/>
+<!--                        <field name="est_courante"/>-->
+                    </group>
+<!--                    <notebook>-->
+<!--                        <page string="Les Semestres de L'étape">-->
+<!--                            <group>-->
+<!--                                <field name="semstre_ids"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Les Années Universitaires">-->
+<!--                            <group>-->
+<!--                                <field name="anneeuniversitaire_ids"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour formation -->
+
+    <record model="ir.ui.view" id="anneeuniversitaire_list_view">
+        <field name="name">anneeuniversitaire.form</field>
+        <field name="model">estk.anneeuniversitaire</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Années Universitaires">
+                        <field name="anneeuniversitaire"/>
+                        <field name="année_prochaine"/>
+                        <field name="debut"/>
+                        <field name="fin"/>
+<!--                        <field name="est_courante"/>-->
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour formation -->
+
+
+<!--    &lt;!&ndash; declaration des Actions pour le model formation &ndash;&gt;-->
+<record model="ir.actions.act_window" id="anneeuniversitaire_list_action">
+            <field name="name">Années Universitaires</field>
+            <field name="res_model">estk.anneeuniversitaire</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre première Année Universitaire</p>
+            </field>
+    </record>
+
+
+        <menuitem id="anneesuniversitaires_menu" name="Années Universitaires"
+                  parent="etapes_menu"  action="anneeuniversitaire_list_action" />
+</odoo>

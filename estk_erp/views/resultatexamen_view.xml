@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model resultatexamen -->
+
+    <!-- form vue pour examenetudiant -->
+    <record model="ir.ui.view" id="resultatexamen_form_view">
+        <field name="name">resultatexamen.form</field>
+        <field name="model">estk.resultatexamen</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire d'un résultat d'examen">
+                <header>
+                    <button name="calculer_note_module"
+                                string="Calculer notes des modules"
+                                type = "object"
+                                class ="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group string="Informations de l'étudiant">
+                        <field name="etudiant_id"/>
+                        <field name="nom"/>
+                        <field name="prenom"/>
+                        <field name="cne"/>
+                        <field name="cni"/>
+                        <field name="appogee"/>
+                    </group>
+                    <group string="Informations de l'examen">
+                        <field name="examen_id"/>
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="formation"/>
+                        <field name="semestre_id"/>
+                        <field name="numéro_examen"/>
+                    </group>
+                    <group string="Note de l'élément de module">
+                         <field name="elementmodule"/>
+                        <field name="note_elementmodule"/>
+                        <field name="observation"/>
+                        <field name="absent"/>
+                        <field name="absence_justifié" attrs="{'invisible': [('absent', '=', False)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour examenetudiant -->
+
+    <record model="ir.ui.view" id="resultatexamen_list_view">
+        <field name="name">resultatexamen.list</field>
+        <field name="model">estk.resultatexamen</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Inscriptions des examens">
+                        <field name="nom"/>
+                        <field name="prenom"/>
+                        <field name="cne"/>
+                        <field name="cni"/>
+                        <field name="appogee"/>
+                        <field name="periode"/>
+                        <field name="type_session"/>
+                        <field name="anneeuniversitaire_id"/>
+                        <field name="formation"/>
+                        <field name="numéro_examen"/>
+                        <field name="semestre_id"/>
+                        <field name="elementmodule"/>
+                        <field name="note_elementmodule"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour examens -->
+
+
+
+<record model="ir.actions.act_window" id="resultatexamen_list_action">
+            <field name="name">Résultats des examens</field>
+            <field name="res_model">estk.resultatexamen</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier résultat d'un examen</p>
+            </field>
+    </record>
+
+
+        <menuitem id="resultatexamen_menu" name="Résultats des Examens"
+                  parent="main_examens_menu"  action="resultatexamen_list_action" sequence="3"/>
+</odoo>

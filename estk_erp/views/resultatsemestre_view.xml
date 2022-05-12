@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!-- declaration des vues form, tree, et search pour le model resultatsemestre -->
+
+    <!-- form vue pour resultatsemestre -->
+    <record model="ir.ui.view" id="resultatsemestre_form_view">
+        <field name="name">resultatsemestre.form</field>
+        <field name="model">estk.resultatsemestre</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire d'un résultat de semestre">
+                <header>
+                    <button name="calculer_note_semestre"
+                                string="Calculer notes du Semestre"
+                                type = "object"
+                                class ="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group string="Informations de l'étudiant">
+                        <field name="etudiant_id"/>
+                    </group>
+                    <group string="Informations de l'examen">
+                        <field name="anneeuniversitaire"/>
+                        <field name="semestre"/>
+                        <field name="session"/>
+                        <field name="module"/>
+                        <field name="note_module"/>
+                        <field name="observation"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree vue pour resultatsemestre -->
+
+    <record model="ir.ui.view" id="resultatsemestre_list_view">
+        <field name="name">resultatsemestre.list</field>
+        <field name="model">estk.resultatsemestre</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Resultats des semestres">
+                        <field name="etudiant_id"/>
+                        <field name="anneeuniversitaire"/>
+                        <field name="semestre"/>
+                        <field name="session"/>
+                        <field name="module"/>
+                        <field name="note_module"/>
+                        <field name="observation"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- search vue pour resultatsemestre -->
+
+
+
+<record model="ir.actions.act_window" id="resultatsemestre_list_action">
+            <field name="name">Résultats de Semestres</field>
+            <field name="res_model">estk.resultatsemestre</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier résultat de Semestre</p>
+            </field>
+    </record>
+
+
+        <menuitem id="resultatsemestre_menu" name="Résultats des Semestres"
+                  parent="main_examens_menu"  action="resultatsemestre_list_action" sequence="4"/>
+</odoo>

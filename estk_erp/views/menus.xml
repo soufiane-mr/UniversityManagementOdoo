@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+        <!-- top level menu: no parent -->
+        <menuitem id="main_etudiants_menu" name="Etudiants" sequence="0"/>
+        <menuitem id="main_formations_menu" name="Formations" sequence="1"/>
+        <menuitem id="main_examens_menu" name="Examens et Résultats" sequence="2"/>
+        <menuitem id="main_professeurs_menu" name="Professeurs et Employés" sequence="3"/>
+        <menuitem id="main_salles_equipements_menu" name="Salles et Equipements" sequence="4"/>
+</odoo>

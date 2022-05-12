@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- declaration des vues form, tree, et search pour le model departement    -->
+
+        <!-- form vue pour departement       -->
+
+    <record model="ir.ui.view" id="departement_form_vue">
+        <field name="name">departement.form</field>
+        <field name="model">estk.departement</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire du Département">
+                <sheet>
+                         <group>
+                           <field name="departement"/>
+                           <field name="professeur_id"/>
+                         </group>
+                        <notebook>
+                            <page string="Formations du departement">
+                                <group>
+                                     <field name="formation_ids" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                            <page string="Professeurs du département">
+                                <group>
+                                   <field name="prefesseur_ids" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+
+    </record>
+
+
+
+        <!-- tree vue pour departement -->
+
+    <record model="ir.ui.view" id="departement_list_vue">
+        <field name="name">departement.list</field>
+        <field name="model">estk.departement</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Départements">
+                <field name="departement"/>
+                <field name="formation_ids" widget="many2many_tags"/>
+                <field name="prefesseur_ids" widget="many2many_tags"/>
+                <field name="professeur_id"/>
+            </tree>
+        </field>
+
+    </record>
+
+
+        <!-- search vue pour departement -->
+
+<!--    <record model="ir.ui.view" id="departement_search_view">-->
+<!--            <field name="name">departement.search</field>-->
+<!--            <field name="model">formations.departement</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search>-->
+<!--                    <field name="departement"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+
+    <!-- declaration des Actions pour le model Departement-->
+
+    <record model="ir.actions.act_window" id="departement_list_action">
+            <field name="name">Departements</field>
+            <field name="res_model">estk.departement</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Créer votre premier département</p>
+            </field>
+        </record>
+
+
+
+
+        <menuitem id="departements_menu" name="Départements"
+                  parent="main_formations_menu" action="departement_list_action" sequence="1" />
+
+
+
+
+</odoo>
